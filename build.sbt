@@ -57,14 +57,56 @@ val buildSettings = Seq[Setting[_]](
   releaseCrossBuild := true
 )
 
-lazy val wvletObj =
-  Project(id = "object-schema", base = file(".")).settings(
+lazy val root = 
+  Project(id = "object-schema-root", base = file(".")).settings(
+    buildSettings,
+    publishArtifact := false,
+    publish := {},
+    publishLocal := {}
+).aggregate(objectSchema, wvletJmx, wvletOpts, wvletConfig)
+
+val wvletLog = "org.wvlet" %% "wvlet-log" % "1.1"
+val wvletTest = "org.wvlet" %% "wvlet-test" % "0.27" % "test"
+
+lazy val objectSchema =
+  Project(id = "object-schema", base = file("object-schema")).settings(
     buildSettings,
     description := "wvlet object schema inspector",
     libraryDependencies ++= Seq(
-      "org.wvlet" %% "wvlet-log" % "1.1",
-      "org.wvlet" %% "wvlet-test" % "0.27" % "test",
+      wvletLog,
+      wvletTest,
       "org.scala-lang" % "scalap" % scalaVersion.value,
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     )
   )
+
+lazy val wvletJmx =
+  Project(id = "wvlet-jmx", base = file("wvlet-jmx")).settings(
+    buildSettings,
+    description := "A library for exposing Scala object data through JMX",
+    libraryDependencies ++= Seq(
+      wvletLog,
+      wvletTest,
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value
+    )
+  ).dependsOn(objectSchema)
+
+lazy val wvletConfig =
+  Project(id = "wvlet-config", base = file("wvlet-config")).settings(
+    buildSettings,
+    description := "wvlet configuration module",
+    libraryDependencies ++= Seq(
+      wvletTest,
+      "org.yaml" % "snakeyaml" % "1.14"
+    )
+  ).dependsOn(objectSchema)
+
+lazy val wvletOpts =
+  Project(id = "wvlet-opts", base = file("wvlet-opts")).settings(
+    buildSettings,
+    description := "wvlet command-line option parser",
+    libraryDependencies ++= Seq(
+      wvletTest,
+      "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4"
+    )
+  ) dependsOn(objectSchema)
