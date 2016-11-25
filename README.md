@@ -1,14 +1,14 @@
-wvlet object-schema
+object-schema
 ======
 
 A library for inspecting Object schema (e.g., parameter names and its types, constructor, etc.)
 
 ## Usage
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.wvlet/wvlet-obj_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.wvlet/wvlet-obj_2.11/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.wvlet/object-schema_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.wvlet/object-schema_2.11/)
 
 ```scala
-libraryDependencies += "org.wvlet" %% "wvlet-obj" % "(version)"
+libraryDependencies += "org.wvlet" %% "object-schema" % "(version)"
 ```
 
 
@@ -31,7 +31,7 @@ detailed types (e.g., type parameters used in Generics: e.g., `String` in `List[
 ## Applications
 
 ### Dependency injection
-wvlet-obj is highly utilized in [wvlet-inject](../wvlet-inject), [wvlet-jmx](../wvlet-jmx) to build programs by inspecting the shape of objects.
+wvlet-obj is highly utilized in [Airframe](https://github.com/wvlet/airframe), [wvlet-jmx](https://github.com/wvlet/jmx) to build programs by inspecting the shape of objects.
 
 For example, in the following code wvlet-inject finds the constructor of `MyApp` class, then list dependencies (`Module1`, `Module2`, ...) that are necessary to build an `MyApp` instance:
 ```scala
