@@ -35,7 +35,7 @@ detailed types (e.g., type parameters used in Generics: e.g., `String` in `List[
 ## Applications
 
 ### Dependency injection
-wvlet-obj is highly utilized in [Airframe](https://github.com/wvlet/airframe), [wvlet-jmx](https://github.com/wvlet/jmx) to build programs by inspecting the shape of objects.
+wvlet-obj is highly utilized in [Airframe](https://github.com/wvlet/airframe), [wvlet-jmx](./wvlet-jmx) to build programs by inspecting the shape of objects.
 
 For example, in the following code wvlet-inject finds the constructor of `MyApp` class, then list dependencies (`Module1`, `Module2`, ...) that are necessary to build an `MyApp` instance:
 ```scala
@@ -63,7 +63,7 @@ wvlet-jmx checks the object schema of `Metrics` and registers its parameters to 
 
 ## Object mapping
 
-[wvlet-config](../wvlet-config) reads Yaml files and binds the data into objects with wvlet-obj.
+[wvlet-config](./wvlet-config) reads Yaml files and binds the data into objects with wvlet-obj.
 
 **config.yml**
 ```
